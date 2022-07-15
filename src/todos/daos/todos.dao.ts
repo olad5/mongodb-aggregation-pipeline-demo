@@ -7,7 +7,7 @@ import { TodoDocument } from "../types/UserDocument";
 
 const log: debug.IDebugger = debug("app:todos-dao");
 
-class TodoDao {
+class TodosDao {
   Schema = mongooseService.getMongoose().Schema;
   nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
@@ -77,4 +77,4 @@ class TodoDao {
   }
 }
 
-export default new TodoDao();
+export default new TodosDao();
