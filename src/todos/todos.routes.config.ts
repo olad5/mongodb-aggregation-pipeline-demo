@@ -1,5 +1,6 @@
 import express from "express";
 import TodosControllers from "./controllers/todos.controllers";
+import TodosMiddleware from "./middlware/todos.middleware";
 
 export class TodoRoutes {
   app: express.Application;
@@ -16,11 +17,17 @@ export class TodoRoutes {
   }
 
   configureRoutes(): express.Application {
+    this.app.route("/createTodo").post(TodosControllers.createTodo);
+
     this.app.route("/todos").get(TodosControllers.listTodos);
-    this.app.route("/createTodo").get(TodosControllers.createTodo);
-    this.app.route("/todos:todoId").get(TodosControllers.getSingleTodo);
-    this.app.route("/todos:todoId").patch(TodosControllers.updateTodo);
-    this.app.route("/todos:todoId").delete(TodosControllers.deleteTodo);
+
+    this.app.param(`todoId`, TodosMiddleware.extractTodoId);
+
+    this.app
+      .route("/todos/:todoId")
+      .get(TodosControllers.getSingleTodo)
+      .patch(TodosControllers.updateTodo)
+      .delete(TodosControllers.deleteTodo);
 
     return this.app;
   }
