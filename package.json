@@ -5,7 +5,7 @@
   "main": "./dist/app.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --rs --exit-child --respawn --watch src src/app.ts",
+    "dev": "ts-node-dev --rs --exit-child --respawn ./src/app.ts",
     "debug": "export DEBUG=* && yarn run dev"
   },
   "keywords": [],
@@ -18,7 +18,7 @@
     "express": "^4.18.1",
     "express-winston": "^4.2.0",
     "mongoose": "^6.4.2",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.3.4",
     "shortid": "^2.2.16",
     "winston": "^3.8.1"
   },
