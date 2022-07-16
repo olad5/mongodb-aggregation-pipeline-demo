@@ -9,7 +9,6 @@ class MongooseService {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000,
-    useFindAndModify: false,
   };
 
   constructor() {
@@ -19,7 +18,7 @@ class MongooseService {
     return mongoose;
   }
 
-  private dbUri = process.env.connection_url as string;
+  private dbUri = process.env.CONNECTION_URL as string;
 
   private connectWithRetry = () => {
     mongoose
