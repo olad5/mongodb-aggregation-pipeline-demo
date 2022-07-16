@@ -27,6 +27,7 @@ export class TodoRoutes {
 
     this.app
       .route("/todos/:todoId")
+      .all(TodosMiddleware.validateTodoExist)
       .get(TodosControllers.getSingleTodo)
       .patch(TodosControllers.updateTodo)
       .delete(TodosControllers.deleteTodo);
