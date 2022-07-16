@@ -17,7 +17,9 @@ export class TodoRoutes {
   }
 
   configureRoutes(): express.Application {
-    this.app.route("/createTodo").post(TodosControllers.createTodo);
+    this.app
+      .route("/createTodo")
+      .post(TodosMiddleware.validateTodoFields, TodosControllers.createTodo);
 
     this.app.route("/todos").get(TodosControllers.listTodos);
 
