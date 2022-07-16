@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
+import debug from "debug";
 import todosService from "../services/todos.service";
+
+const log: debug.IDebugger = debug("app:todos-controllers");
 
 class TodosController {
   async listTodos(req: Request, res: Response) {
-    const { limit, page } = req.body.query;
-    const todos = await todosService.list(limit, page);
+    const { limit = 10, page = 0 } = req.query;
+    const todos = await todosService.list(Number(limit), Number(page));
     return res.status(200).send(todos);
   }
 
@@ -14,7 +17,7 @@ class TodosController {
   }
   async createTodo(req: Request, res: Response) {
     const todoId = await todosService.create(req.body);
-    return res.status(200).send({ id: todoId });
+    return res.status(201).send({ id: todoId });
   }
 
   async updateTodo(req: Request, res: Response) {
